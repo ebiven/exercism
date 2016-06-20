@@ -9,12 +9,6 @@ defmodule ETL do
   """
   @spec transform(map) :: map
   def transform(input) do
-    Enum.reduce(input, %{}, &reducer/2)
-  end
-
-  def reducer({_, []}, acc), do: acc
-  def reducer({key, [head|tail]}, acc) do
-    acc = Map.put_new(acc, String.downcase(head), key)
-    reducer({key, tail}, acc)
+    for {key, values} <- input, value <- values, into: %{}, do: {String.downcase(value), key}
   end
 end
