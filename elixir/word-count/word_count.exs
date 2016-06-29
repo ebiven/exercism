@@ -1,6 +1,4 @@
 defmodule Words do
-  import String, only: [downcase: 1, replace: 3, split: 1]
-
   @doc """
   Count the number of words in the sentence.
 
@@ -9,15 +7,15 @@ defmodule Words do
   @spec count(String.t) :: map
   def count(sentence) do
     sentence
-    |> downcase
-    |> replace("_", " ") # Underscores are spaces.
-    |> replace(~r/[^\w\d -]/iu, "") # Keep letters, numbers, spaces, and hyphens.
-    |> split
-    |> group(%{})
+    |> sanitize
+    |> String.split
+    |> Enum.reduce(%{}, fn x, acc -> Map.update(acc, x, 1, &(&1 + 1)) end)
   end
 
-  def group([], map), do: map
-  def group(list = [head|tail], map) do
-    group(tail, Map.update(map, head, 1, &(&1 + 1)))
+  defp sanitize(sentence) do
+    sentence
+    |> String.downcase
+    |> String.replace("_", " ") # Underscores are spaces.
+    |> String.replace(~r/[^\p{L}\d -]/iu, "") # Keep only letters, numbers, spaces, and hyphens.
   end
 end
