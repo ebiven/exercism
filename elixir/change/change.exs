@@ -16,27 +16,26 @@ defmodule Change do
   """
 
   @spec generate(integer, list) :: {:ok, map} | :error
-  def generate(_, []), do: :error
   def generate(amount, values) do
-    gather(amount, values, build_coin_map(values))
+    gather(amount, build_coin_map(values))
   end
 
   defp build_coin_map(coins) do
-    Enum.reduce(coins, %{}, &(Map.put(&2, &1, 0)))
+    for c <- coins, into: %{}, do: {c, 0}
   end
 
-  defp gather(0, _, change), do: {:ok, change}
-  defp gather(remaining, coins, change) do
-    next_coins = Enum.filter(coins, &(&1 <= remaining))
+  defp gather(0, change), do: {:ok, change}
+  defp gather(remaining, change) do
+    next_coins = Map.keys(change) |> Enum.filter(&(&1 <= remaining))
     case length(next_coins) do
       # There's remaining change to give, but no coins small enough to
       # cover it.
       0 -> :error
       _ ->
         next_coin = Enum.max(next_coins)
-        change = Map.update(change, next_coin, 1, &(&1 + 1))
+        change    = Map.update(change, next_coin, 1, &(&1 + 1))
         remaining = remaining - next_coin
-        gather(remaining, coins, change)
+        gather(remaining, change)
     end
   end
 end
