@@ -10,7 +10,7 @@ defmodule BinaryTest do
 
   # @tag :pending
   test "binary 1 is decimal 1" do
-    assert Binary.to_decimal("1") == 1
+    assert Binary.to_decimal("1") === 1
   end
 
   test "binary 10 is decimal 2" do
