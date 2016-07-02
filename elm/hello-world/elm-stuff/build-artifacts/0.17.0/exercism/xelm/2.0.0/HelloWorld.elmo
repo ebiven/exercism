@@ -1,0 +1,11 @@
+var _exercism$xelm$HelloWorld$helloWorld = function (name) {
+	var _p0 = name;
+	if (_p0.ctor === 'Just') {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			'Hello, ',
+			A2(_elm_lang$core$Basics_ops['++'], _p0._0, '!'));
+	} else {
+		return 'Hello, World!';
+	}
+};

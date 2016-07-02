@@ -1,0 +1,32 @@
+var _exercism$xelm$Main$tests = A2(
+	_elm_community$elm_test$ElmTest$suite,
+	'Hello, World!',
+	_elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'Hello with no name',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Hello, World!',
+				_exercism$xelm$HelloWorld$helloWorld(_elm_lang$core$Maybe$Nothing))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'Hello to a sample name',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Hello, Alice!',
+				_exercism$xelm$HelloWorld$helloWorld(
+					_elm_lang$core$Maybe$Just('Alice')))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'Hello to another sample name',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Hello, Bob!',
+				_exercism$xelm$HelloWorld$helloWorld(
+					_elm_lang$core$Maybe$Just('Bob'))))
+		]));
+var _exercism$xelm$Main$main = {
+	main: _elm_community$elm_test$ElmTest$runSuite(_exercism$xelm$Main$tests)
+};

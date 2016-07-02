@@ -1,0 +1,184 @@
+var _exercism$xelm$Main$listOfCharacters = F2(
+	function (length, characterList) {
+		return A2(_elm_lang$core$Random$list, length, characterList);
+	});
+var _exercism$xelm$Main$gibberish = F2(
+	function (length, characterList) {
+		return _elm_lang$core$Basics$fst(
+			A2(
+				_elm_lang$core$Random$step,
+				A2(
+					_elm_lang$core$Random$map,
+					_elm_lang$core$String$fromList,
+					A2(_exercism$xelm$Main$listOfCharacters, length, characterList)),
+				_elm_lang$core$Random$initialSeed(424242)));
+	});
+var _exercism$xelm$Main$character = F2(
+	function (start, end) {
+		return A2(
+			_elm_lang$core$Random$map,
+			_elm_lang$core$Char$fromCode,
+			A2(_elm_lang$core$Random$int, start, end));
+	});
+var _exercism$xelm$Main$anyCharacter = A2(_exercism$xelm$Main$character, 32, 126);
+var _exercism$xelm$Main$gibberishQuestion = function (length) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		A2(_exercism$xelm$Main$gibberish, length, _exercism$xelm$Main$anyCharacter),
+		'?');
+};
+var _exercism$xelm$Main$uppercaseCharacter = A2(_exercism$xelm$Main$character, 65, 90);
+var _exercism$xelm$Main$uppercaseGibberish = function (length) {
+	return A2(_exercism$xelm$Main$gibberish, length, _exercism$xelm$Main$uppercaseCharacter);
+};
+var _exercism$xelm$Main$tests = A2(
+	_elm_community$elm_test$ElmTest$suite,
+	'Bob',
+	_elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'stating something',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Whatever.',
+				_exercism$xelm$Bob$hey('Tom-ay-to, tom-aaaah-to.'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'shouting',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Whoa, chill out!',
+				_exercism$xelm$Bob$hey('WATCH OUT!'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'shouting gibberish',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Whoa, chill out!',
+				_exercism$xelm$Bob$hey(
+					_exercism$xelm$Main$uppercaseGibberish(10)))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'asking a question',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Sure.',
+				_exercism$xelm$Bob$hey('Does this cryogenic chamber make me look fat?'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'asking a numeric question',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Sure.',
+				_exercism$xelm$Bob$hey('You are, what, like 15?'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'asking gibberish',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Sure.',
+				_exercism$xelm$Bob$hey(
+					_exercism$xelm$Main$gibberishQuestion(20)))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'talking forcefully',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Whatever.',
+				_exercism$xelm$Bob$hey('Let\'s go make out behind the gym!'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'using acronyms in regular speech',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Whatever.',
+				_exercism$xelm$Bob$hey('It\'s OK if you don\'t want to go to the DMV.'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'forceful questions',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Whoa, chill out!',
+				_exercism$xelm$Bob$hey('WHAT THE HELL WERE YOU THINKING?'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'shouting numbers',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Whoa, chill out!',
+				_exercism$xelm$Bob$hey('1, 2, 3 GO!'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'only numbers',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Whatever.',
+				_exercism$xelm$Bob$hey('1, 2, 3'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'question with only numbers',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Sure.',
+				_exercism$xelm$Bob$hey('4?'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'shouting with special characters',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Whoa, chill out!',
+				_exercism$xelm$Bob$hey('ZOMG THE %^*@#$(*^ ZOMBIES ARE COMING!!11!!1!)'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'shouting with no exclamation mark',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Whoa, chill out!',
+				_exercism$xelm$Bob$hey('I HATE YOU'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'statement containing a question mark',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Whatever.',
+				_exercism$xelm$Bob$hey('Ending with ? means a question.'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'prattling on',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Sure.',
+				_exercism$xelm$Bob$hey('Wait! Hang on. Are you going to be OK?'))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'silence',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Fine. Be that way!',
+				_exercism$xelm$Bob$hey(''))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'prolonged silence',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Fine. Be that way!',
+				_exercism$xelm$Bob$hey('       '))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'alternate silences',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Fine. Be that way!',
+				_exercism$xelm$Bob$hey('\t  \n  \t   '))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'on multiple line questions',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				'Whatever.',
+				_exercism$xelm$Bob$hey('\nDoes this cryogenic chamber make me look fat?\nno')))
+		]));
+var _exercism$xelm$Main$main = {
+	main: _elm_community$elm_test$ElmTest$runSuite(_exercism$xelm$Main$tests)
+};

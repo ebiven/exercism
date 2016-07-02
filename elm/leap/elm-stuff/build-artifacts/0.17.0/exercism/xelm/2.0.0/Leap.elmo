@@ -1,0 +1,18 @@
+var _exercism$xelm$Leap$by400 = function (year) {
+	return _elm_lang$core$Native_Utils.eq(
+		A2(_elm_lang$core$Basics_ops['%'], year, 400),
+		0);
+};
+var _exercism$xelm$Leap$notBy100 = function (year) {
+	return !_elm_lang$core$Native_Utils.eq(
+		A2(_elm_lang$core$Basics_ops['%'], year, 100),
+		0);
+};
+var _exercism$xelm$Leap$by4 = function (year) {
+	return _elm_lang$core$Native_Utils.eq(
+		A2(_elm_lang$core$Basics_ops['%'], year, 4),
+		0);
+};
+var _exercism$xelm$Leap$isLeapYear = function (year) {
+	return _exercism$xelm$Leap$by4(year) && (_exercism$xelm$Leap$notBy100(year) || _exercism$xelm$Leap$by400(year));
+};

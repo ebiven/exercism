@@ -1,0 +1,58 @@
+var _exercism$xelm$Main$tests = A2(
+	_elm_community$elm_test$ElmTest$suite,
+	'Leap',
+	_elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'leap year',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				true,
+				_exercism$xelm$Leap$isLeapYear(1996))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'non-leap year',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				false,
+				_exercism$xelm$Leap$isLeapYear(1997))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'non-leap even year',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				false,
+				_exercism$xelm$Leap$isLeapYear(1998))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'century',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				false,
+				_exercism$xelm$Leap$isLeapYear(1900))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'second century',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				false,
+				_exercism$xelm$Leap$isLeapYear(1800))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'fourth century',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				true,
+				_exercism$xelm$Leap$isLeapYear(2400))),
+			A2(
+			_elm_community$elm_test$ElmTest$test,
+			'y2k',
+			A2(
+				_elm_community$elm_test$ElmTest$assertEqual,
+				true,
+				_exercism$xelm$Leap$isLeapYear(2000)))
+		]));
+var _exercism$xelm$Main$main = {
+	main: _elm_community$elm_test$ElmTest$runSuite(_exercism$xelm$Main$tests)
+};

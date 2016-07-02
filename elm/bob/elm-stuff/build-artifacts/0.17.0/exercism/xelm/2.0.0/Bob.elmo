@@ -1,0 +1,16 @@
+var _exercism$xelm$Bob$hasCharactersRegex = _elm_lang$core$Regex$regex('[A-z]');
+var _exercism$xelm$Bob$isYelling = function (input) {
+	return _elm_lang$core$Native_Utils.eq(
+		input,
+		_elm_lang$core$String$toUpper(input)) && A2(_elm_lang$core$Regex$contains, _exercism$xelm$Bob$hasCharactersRegex, input);
+};
+var _exercism$xelm$Bob$isNothing = function (input) {
+	return _elm_lang$core$String$isEmpty(
+		_elm_lang$core$String$trim(input));
+};
+var _exercism$xelm$Bob$isQuestion = function (input) {
+	return A2(_elm_lang$core$String$endsWith, '?', input);
+};
+var _exercism$xelm$Bob$hey = function (input) {
+	return _exercism$xelm$Bob$isNothing(input) ? 'Fine. Be that way!' : (_exercism$xelm$Bob$isYelling(input) ? 'Whoa, chill out!' : (_exercism$xelm$Bob$isQuestion(input) ? 'Sure.' : 'Whatever.'));
+};
