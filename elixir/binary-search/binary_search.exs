@@ -25,12 +25,12 @@ defmodule BinarySearch do
 
   defp do_search([], _), do: :not_found
   defp do_search(list, key) do
-    mid_point = (Enum.count(list) - 1) / 2 |> round
-    {mid_item, mid_index} = Enum.at(list, mid_point)
+    {l, r} = Enum.split(list, div(length(list), 2))
+    {[{item, index}], r} = Enum.split(r, 1)
     cond do
-      mid_item == key -> {:ok, mid_index}
-      mid_item >  key -> do_search(Enum.slice(list, 0, mid_point), key)
-      true            -> do_search(Enum.slice(list, mid_point + 1, Enum.count(list)), key)
+      item == key -> {:ok, index}
+      item >  key -> do_search(l, key)
+      true        -> do_search(r, key)
     end
   end
 end
