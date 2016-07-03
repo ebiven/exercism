@@ -7,7 +7,7 @@ defmodule Diamond do
   def build_shape(?A), do: "A\n"
   def build_shape(letter) do
     dimension    = (letter - 64) * 2 - 1
-    mid_point    = (dimension/2) |> Float.floor |> round
+    mid_point    = div(dimension, 2)
     range1       = 0..mid_point
     range2       = (mid_point - 1)..0
     range        = Enum.concat(Enum.to_list(range1), Enum.to_list(range2))
@@ -16,14 +16,14 @@ defmodule Diamond do
     "#{shape_string}\n"
   end
 
-  def build_shape([], dimension, mid_point, acc), do: acc
+  def build_shape([], _dimension, _mid_point, acc), do: acc
   def build_shape([head|tail], dimension, mid_point, acc) do
     row = " "
     |> List.duplicate(dimension)
     |> List.replace_at(mid_point - head, [head + 65])
     |> List.replace_at(mid_point + head, [head + 65])
     |> Enum.join
-    |> String.rstrip
+    |> String.trim_trailing
 
     build_shape(tail, dimension, mid_point, [row | acc])
   end
