@@ -13,7 +13,11 @@ defmodule Anagram do
   def letter_counts(word) do
     word
     |> String.downcase
-    |> String.split("", trim: true)
-    |> Enum.reduce(%{}, fn x, acc -> Map.update(acc, x, 1, &(&1+1)) end)
+    |> String.codepoints
+    |> Enum.sort
+    #word
+    #|> String.downcase
+    #|> String.split("", trim: true)
+    #|> Enum.reduce(%{}, fn x, acc -> Map.update(acc, x, 1, &(&1+1)) end)
   end
 end
