@@ -14,10 +14,6 @@ defmodule Year do
     by_100 = rem(year, 100) == 0
     by_400 = rem(year, 400) == 0
 
-    cond do
-      by_4 && !by_100 -> :true
-      by_4 && by_400  -> :true
-      true            -> :false
-    end
+    by_4 && (!by_100 || by_400)
   end
 end
