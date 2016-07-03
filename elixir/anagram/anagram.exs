@@ -15,9 +15,5 @@ defmodule Anagram do
     |> String.downcase
     |> String.codepoints
     |> Enum.sort
-    #word
-    #|> String.downcase
-    #|> String.split("", trim: true)
-    #|> Enum.reduce(%{}, fn x, acc -> Map.update(acc, x, 1, &(&1+1)) end)
   end
 end
