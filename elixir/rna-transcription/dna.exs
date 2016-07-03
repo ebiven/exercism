@@ -10,7 +10,7 @@ defmodule DNA do
   @spec to_rna([char]) :: [char]
   def to_rna(dna) do
     dna
-    |> Enum.map(&(substitute(&1)))
+    |> Enum.map(&substitute/1)
   end
 
   defp substitute(nucleotide) do
