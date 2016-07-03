@@ -8,7 +8,6 @@ defmodule Acronym do
     string
     |> String.split(~r/(?=[A-Z])|[ -]/u)
     |> Enum.map(&(String.at(&1, 0)))
-    |> Enum.map(&String.upcase/1)
-    |> Enum.join
+    |> Enum.map_join("", &String.upcase/1)
   end
 end
