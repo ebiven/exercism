@@ -1,5 +1,5 @@
 defmodule Forth do
-  @opaque evaluator :: any
+  @opaque evaluator :: %Forth{}
 
   defstruct stack: [], words: %{}, current_stack: []
 
@@ -16,7 +16,7 @@ defmodule Forth do
   """
   @spec eval(evaluator, String.t) :: evaluator
   def eval(ev, s) do
-    eval %Forth{ev|stack: tokens(ev, s)}
+    eval %Forth{ev|stack: tokens(s)}
   end
   defp eval(ev=%Forth{stack: [], current_stack: cs}) do
     %Forth{ev|stack: cs}
@@ -48,7 +48,7 @@ defmodule Forth do
     sub = Enum.reject(tail, &(&1 == ";"))
     case Enum.count(sub) do
       0 -> raise Forth.InvalidWord
-      _ -> Map.update(words, new_word, sub, fn x -> sub end)
+      _ -> Map.update(words, new_word, sub, fn _x -> sub end)
     end
   end
 
@@ -78,7 +78,7 @@ defmodule Forth do
 
   defp do_statement([0], "/"), do: raise Forth.DivisionByZero
   defp do_statement([], _operator), do: raise Forth.StackUnderflow
-  defp do_statement([_head], operator), do: raise Forth.StackUnderflow
+  defp do_statement([_head], _operator), do: raise Forth.StackUnderflow
 
   defp do_statement([head|tail], "+"), do: Enum.reduce(tail, head, &(&2 + &1))
   defp do_statement([head|tail], "-"), do: Enum.reduce(tail, head, &(&2 - &1))
@@ -94,7 +94,7 @@ defmodule Forth do
     ev.stack |> Enum.join(" ")
   end
 
-  defp tokens(ev, s) do
+  defp tokens(s) do
     Regex.split(~r/[^\p{L}\p{N}\p{S}\p{P}]+/u, s)
     |> Enum.map(fn v ->
                   case Integer.parse(v) do
@@ -105,7 +105,6 @@ defmodule Forth do
   end
 
   defp expand(ev) do
-    keys = Map.keys(ev.words)
     new_stack = Enum.map(ev.stack, fn x ->
       case Map.get(ev.words, x) do
         nil -> x
