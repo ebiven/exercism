@@ -11,8 +11,9 @@ defmodule Prime do
   def nth(_), do: "Stop it"
 
   defp get_primes(count, check, acc) do
-    if prime?(check) do
-      acc = acc ++ [check]
+    acc = case prime?(check) do
+      true -> acc ++ [check]
+      _    -> acc
     end
     if Enum.count(acc) == count do
       check
