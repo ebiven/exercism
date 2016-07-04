@@ -11,29 +11,17 @@ defmodule Raindrops do
   @spec convert(pos_integer) :: String.t
   def convert(1), do: "1"
   def convert(number) do
-    out = ""
-    factors = factors_for(number)
-    if Enum.any?(factors, &(&1 == 3)), do: out = out <> "Pling"
-    if Enum.any?(factors, &(&1 == 5)), do: out = out <> "Plang"
-    if Enum.any?(factors, &(&1 == 7)), do: out = out <> "Plong"
-    if String.length(out) == 0,        do: out = "#{number}"
-    out
-  end
+    out = do_convert(number, 3, "Pling") <>
+          do_convert(number, 5, "Plang") <>
+          do_convert(number, 7, "Plong")
 
-  defp factors_for(1), do: []
-  defp factors_for(number) do
-    number
-    |> do_factors(2, [])
-    |> Enum.reverse
-  end
-
-  defp do_factors(1, _, acc), do: acc
-  defp do_factors(number, divisor, acc) do
-    remainder = rem(number, divisor)
-    division = div(number, divisor)
-    case remainder do
-      0 -> do_factors(division, divisor, [divisor|acc])
-      _ -> do_factors(number, divisor + 1, acc)
+    if String.length(out) > 0 do
+      out
+    else
+      "#{number}"
     end
   end
+
+  defp do_convert(n, b, s) when rem(n, b) == 0, do: s
+  defp do_convert(_, _, _), do: ""
 end
