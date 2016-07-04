@@ -8,14 +8,12 @@ defmodule PrimeFactors do
   The prime factors of 'number' will be ordered lowest to highest.
   """
   @spec factors_for(pos_integer) :: [pos_integer]
-  def factors_for(1), do: []
   def factors_for(number) do
     number
     |> do_factors(2, [])
-    |> Enum.reverse
   end
 
-  defp do_factors(1, _, acc), do: acc
+  defp do_factors(1, _, acc), do: Enum.reverse(acc)
   defp do_factors(number, divisor, acc) do
     remainder = rem(number, divisor)
     division = div(number, divisor)
