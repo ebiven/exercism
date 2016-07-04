@@ -10,7 +10,10 @@ defmodule Palindromes do
   end
 
   def generate(x, y, max, acc) do
-    if is_palindrome(x*y), do: acc = Map.update(acc, x*y, [[x,y]], &([[x,y]|&1]))
+    acc = cond do
+      is_palindrome(x*y) -> Map.update(acc, x*y, [[x,y]], &([[x,y]|&1]))
+      true               -> acc
+    end
     cond do
       x >= max && y >= max   -> acc
       y <  max               -> generate(x, y+1, max, acc)
