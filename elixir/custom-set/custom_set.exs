@@ -1,8 +1,4 @@
 defmodule CustomSet do
-  # This lets the compiler check that all Set callback functions have been
-  # implemented.
-  @behaviour Set
-
   defstruct list: []
 
   def delete(set, value), do: new(Enum.reject(set.list, &(&1 === value)))
