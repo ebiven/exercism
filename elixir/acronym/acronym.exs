@@ -7,7 +7,6 @@ defmodule Acronym do
   def abbreviate(string) do
     string
     |> String.split(~r/(?=\p{Lu})|[ -]/u)
-    |> Enum.map(&String.first/1)
-    |> Enum.map_join("", &String.upcase/1)
+    |> Enum.map_join("", &(&1 |> String.first |> String.upcase))
   end
 end
