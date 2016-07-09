@@ -8,9 +8,8 @@ DnaTranscriber.prototype.translations = {
 };
 
 DnaTranscriber.prototype.toRna = function(strand) {
-  let self = this;
   return [...strand]
-    .map((i) => { return self.translations[i]; })
+    .map((i) => { return this.translations[i]; }, this)
     .join("");
 };
 
