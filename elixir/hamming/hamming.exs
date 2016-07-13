@@ -12,7 +12,6 @@ defmodule DNA do
   def hamming_distance(strand1, strand2) do
     strand1
     |> Enum.zip(strand2)
-    |> Enum.reject(fn {l, r} -> l === r end)
-    |> length
+    |> Enum.count(fn {l, r} -> l != r end)
   end
 end
