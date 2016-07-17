@@ -4,9 +4,10 @@ class Phrase
   end
 
   def word_count
-    h = Hash.new(0)
-    @phrase.each { |word| h[word] += 1 }
-    h
+    @phrase.inject(Hash.new(0)) do |acc, word|
+      acc[word] += 1
+      acc
+    end
   end
 end
 
