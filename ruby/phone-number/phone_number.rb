@@ -1,4 +1,6 @@
 class PhoneNumber
+  attr_reader :area_code, :office_code, :extension, :number
+
   def initialize(raw)
     r = raw.gsub(/[ ()\.-]/, '').match(/^1?(\d{3})(\d{3})(\d{4})$/)
     if r
@@ -10,15 +12,7 @@ class PhoneNumber
       @office_code = '000'
       @extension   = '0000'
     end
-    @parsed = @area_code + @office_code + @extension
-  end
-
-  def number
-    @parsed
-  end
-
-  def area_code
-    @area_code
+    @number = @area_code + @office_code + @extension
   end
 
   def to_s
