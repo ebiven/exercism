@@ -2,28 +2,25 @@ class Alphametics
   # This feels a little hackish, and it's certainly brute force all the
   # way, but it works like a champ.
   def solve(input)
-    input.freeze
+    # Sub in the power operator.
+    input.gsub!(/ \^ /, '**')
     distinct_letters = input.gsub(/[^A-Z]/, '').chars.uniq
 
     # Get all the possible answer maps.
-    options = []
-    (0..9).to_a
-      .combination(distinct_letters.length).to_a.each do |c|
-        c.permutation do |p|
-          option = (p.zip(distinct_letters).each_with_object({}) { |(i,l), a| a[l] = i } )
-          options.push(option)
-        end
+    options = (0..9).to_a
+      .permutation(distinct_letters.length).to_a.map do |p|
+        p.zip(distinct_letters).each_with_object({}) { |(i,l), a| a[l] = i }
       end
 
-    # Check them one at a time.
-    winner = nil
-    options.each do |o|
+    # By selecting on them I could theoretically find bad puzzles that
+    # have multiple valid answers
+    out = options.select do |o|
       check = input.tr(o.keys.join, o.values.join)
-      check.gsub!(/ \^ /, '**')
+      # Numbers can't start with a 0.
       next if check =~ /^0| 0\d/
-      winner = o if eval(check)
+      o if eval(check)
     end
-    winner
+    out[0]
   end
 end
 
