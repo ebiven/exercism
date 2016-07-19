@@ -1,9 +1,9 @@
 class Queens
   attr_reader :white, :black
 
-  def initialize(positions={})
-    @white = positions.fetch(:white) { [0, 3] }
-    @black = positions.fetch(:black) { [7, 3] }
+  def initialize(white: [0,3], black: [7,3])
+    @white = white
+    @black = black
     raise ArgumentError if @white == @black
   end
 
