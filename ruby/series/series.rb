@@ -5,8 +5,6 @@ class Series
 
   def slices(size)
     raise ArgumentError if @input.length < size
-    (0..@input.length - size).each_with_object([]) do |i, acc|
-      acc.push @input.slice(i, size)
-    end
+    @input.each_cons(size).to_a
   end
 end
