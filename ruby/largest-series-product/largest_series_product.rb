@@ -1,18 +1,15 @@
 class Series
   def initialize(digits)
-    raise ArgumentError if digits =~ /[^\d]/
-    @digits = digits.chars.map(&:to_i)
+    @digits = digits
   end
 
   def largest_product(window_size)
+    raise ArgumentError if @digits =~ /[^\d]/
     raise ArgumentError if window_size > @digits.length || window_size < 0
     return 1 if @digits.empty? or window_size == 0
-    out = 0
-    @digits.each_cons(window_size) do |i|
-      p = i.reduce(1, :*)
-      out = p if p > out
-    end
-    out
+    @digits.chars.map(&:to_i).each_cons(window_size)
+      .map { |w| w.reduce(1, :*) }
+      .max
   end
 end
 
