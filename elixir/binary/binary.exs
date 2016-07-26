@@ -10,16 +10,15 @@ defmodule Binary do
       true ->
         string
         |> String.codepoints
-        |> Enum.map(&String.to_integer/1)
-        |> do_decimal
-        |> round
+        |> Enum.reverse
+        |> Enum.with_index
+        |> Enum.reduce(0, &do_decimal/2)
 
       _ -> 0
     end
   end
 
-  defp do_decimal([]), do: 0
-  defp do_decimal([head|tail]) do
-    head * :math.pow(2, Enum.count(tail)) + do_decimal(tail)
+  defp do_decimal({n, i}, acc) do
+    acc + String.to_integer(n) * round(:math.pow(2, i))
   end
 end
