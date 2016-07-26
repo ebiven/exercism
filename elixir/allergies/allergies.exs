@@ -17,7 +17,7 @@ defmodule Allergies do
   """
   @spec list(non_neg_integer) :: [String.t]
   def list(flags) do
-    for {k,v} <- @allergens, (flags &&& v) != 0, do: k
+    for {k, _v} <- @allergens, allergic_to?(flags, k), do: k
   end
 
   @doc """
