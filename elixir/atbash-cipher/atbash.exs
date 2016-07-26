@@ -1,8 +1,6 @@
 defmodule Atbash do
 
-  @codes Enum.to_list(?a..?z)
-  @alpha_key for {k,v} <- Enum.zip(@codes, Enum.reverse(@codes)), into: %{}, do: {k,v}
-  @key for v <- ?0..?9, into: @alpha_key, do: {v,v}
+  @key Enum.zip(?a..?z, ?z..?a) |> Map.new
 
   @doc """
   Encode a given plaintext to the corresponding ciphertext
@@ -17,8 +15,8 @@ defmodule Atbash do
     plaintext
     |> String.downcase
     |> String.replace(~r/[^a-z0-9]/, "")
-    |> String.codepoints
-    |> Enum.map(&(Map.get(@key, hd String.to_char_list(&1))))
+    |> String.to_charlist
+    |> Enum.map(&Map.get(@key, &1, &1))
     |> Enum.chunk(5, 5, [])
     |> Enum.join(" ")
   end
