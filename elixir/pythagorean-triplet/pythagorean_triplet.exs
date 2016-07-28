@@ -29,16 +29,15 @@ defmodule Triplet do
   """
   @spec generate(non_neg_integer, non_neg_integer) :: [list(non_neg_integer)]
   def generate(min \\ 1, max) do
-    # This is pretty brute-force, and it comes up with dupes, but it works.
     all = for a <- Range.new(min, max-2),
               b <- Range.new(min+1, max-1),
               c <- Range.new(min+2, max),
               pythagorean?([a, b, c]),
+              a < b,
           into: [],
           do: [a, b, c]
     all
     |> Enum.map(&Enum.sort/1)
-    |> Enum.uniq
   end
 
   @doc """
