@@ -17,33 +17,32 @@ defmodule Hexadecimal do
 
   @spec to_decimal(binary) :: integer
   def to_decimal(hex) do
-    case String.match?(hex, ~r/[^0-9a-f]/i) do
-      true -> 0
-      _    ->
+    case String.match?(hex, ~r/^[0-9a-f]+$/i) do
+      true ->
         hex
         |> String.downcase
-        |> String.graphemes
+        |> String.codepoints
         |> Enum.reverse
-        |> do_calc
+        |> Enum.with_index
+        |> Enum.reduce(0, &do_decimal/2)
+
+      _ -> 0
     end
   end
 
-  defp do_calc(list), do: do_calc(list, 0, 0)
-  defp do_calc([], acc, _position), do: acc
-  defp do_calc([head|tail], acc, position) do
-    item_value = get_integer(head) * (round :math.pow(16, position))
-    do_calc(tail, acc + item_value, position + 1)
+  defp do_decimal({n, i}, acc) do
+    acc + get_integer(n) * round(:math.pow(16, i))
   end
 
-  defp get_integer(i) do
+  defp get_integer(n) do
     cond do
-      i == "a" -> 10
-      i == "b" -> 11
-      i == "c" -> 12
-      i == "d" -> 13
-      i == "e" -> 14
-      i == "f" -> 15
-      true     -> String.to_integer i
+      n == "a" -> 10
+      n == "b" -> 11
+      n == "c" -> 12
+      n == "d" -> 13
+      n == "e" -> 14
+      n == "f" -> 15
+      true     -> String.to_integer n
     end
   end
 end
