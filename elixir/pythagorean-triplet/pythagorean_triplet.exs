@@ -36,8 +36,6 @@ defmodule Triplet do
               a < b,
           into: [],
           do: [a, b, c]
-    all
-    |> Enum.map(&Enum.sort/1)
   end
 
   @doc """
