@@ -39,8 +39,6 @@ defmodule Queens do
   def can_attack?(%{:white => {a, _}, :black => {a, _}}), do: true
   def can_attack?(%{:white => {_, a}, :black => {_, a}}), do: true
   def can_attack?(%{:white => {wx, wy}, :black => {bx, by}}) do
-    first_diag = wx - wy == bx - by
-    second_diag = wy - wx == bx - by
-    first_diag || second_diag
+    abs(wx-bx) == abs(wy-by)
   end
 end
