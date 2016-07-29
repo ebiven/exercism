@@ -9,17 +9,14 @@ defmodule Triangle do
   """
   @spec kind(number, number, number) :: { :ok, kind } | { :error, String.t }
 
-  def kind(a, b, c) when a <= 0 or b <= 0 or c <= 0, do: @positive_error
-
-  def kind(a, b, c) when a + b <= c, do: @inequality_error
-  def kind(a, b, c) when b + c <= a, do: @inequality_error
-  def kind(a, b, c) when c + a <= b, do: @inequality_error
-
-  def kind(a, a, a), do: {:ok, :equilateral}
-
-  def kind(a, a, _), do: {:ok, :isosceles}
-  def kind(a, _, a), do: {:ok, :isosceles}
-  def kind(_, a, a), do: {:ok, :isosceles}
-
-  def kind(_, _, _), do: {:ok, :scalene}
+  def kind(a, b, c) do
+    [x, y, z] = Enum.sort([a, b, c])
+    cond do
+      x <= 0           -> @positive_error
+      x + y <= z       -> @inequality_error
+      x == z           -> {:ok, :equilateral}
+      x == y || y == z -> {:ok, :isosceles}
+      true             -> {:ok, :scalene}
+    end
+  end
 end
