@@ -12,9 +12,9 @@ module Translation
   }
 
   def self.of_codon(codon)
-    out = TRANS.select{|k,v| v.include?(codon)}.keys.first
-    raise InvalidCodonError if out.nil?
-    out
+    TRANS
+      .select { |k,v| v.include?(codon)}
+      .keys.first or fail InvalidCodonError
   end
 
   def self.of_rna(input)
