@@ -1,15 +1,15 @@
-var Binary = function(value) {
+const Binary = function(value) {
   this.value = value;
 };
 
 Binary.prototype.toDecimal = function() {
-  if (!this.value.match(/^[01]+$/)) { return 0; }
-  let out = 0;
-  let remaining = this.value.length;
-  [...this.value].forEach((i) => {
-    out += i * Math.pow(2, --remaining);
-  });
-  return out;
+  return DecimalConverter(this.value, /^[01]+$/, 2);
 };
 
 module.exports = Binary;
+
+const DecimalConverter = function(value, matchRegex, base) {
+  if (!value.match(matchRegex)) { return 0; }
+  return [...value].reverse().reduce((pV, cV, index) =>
+    pV + cV * Math.pow(base, index), 0);
+};
