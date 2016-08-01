@@ -16,7 +16,7 @@ Bob.prototype.isNothing = function(input) {
 };
 
 Bob.prototype.isYelling = function(input) {
-  return input.toUpperCase() == input && input.match(/[A-z]/u);
+  return input.toUpperCase() == input && input.match(/[A-z]/);
 };
 
 module.exports = Bob;
