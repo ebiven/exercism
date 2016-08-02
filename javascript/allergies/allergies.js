@@ -1,4 +1,4 @@
-var Allergies = function(flags) {
+const Allergies = function(flags) {
   this.flags = flags;
 };
 
@@ -14,11 +14,7 @@ Allergies.allergens = {
 }
 
 Allergies.prototype.list = function() {
-  let out = [];
-  Object.keys(Allergies.allergens).forEach((k) => {
-    if (Allergies.allergens[k] & this.flags) { out.push(k); }
-  });
-  return out;
+  return Object.keys(Allergies.allergens).filter((k) => this.allergicTo(k));
 };
 
 Allergies.prototype.allergicTo = function(item) {
