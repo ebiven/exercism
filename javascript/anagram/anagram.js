@@ -1,25 +1,19 @@
-var Anagram = function(word) {
+const Anagram = function(word) {
   this.word = word;
 };
 
 Anagram.prototype.matches = function(inputs) {
   inputs = Array.isArray(inputs) ? inputs : [].slice.call(arguments, 0);
-  const sortedWord = this.sortedChars(this.word);
-  let matches = [];
-  inputs.forEach((input) => {
-    if (this.word.toLowerCase() == input.toLowerCase()) {
-      return;
-    }
-    if (sortedWord == this.sortedChars(input)) {
-      matches.push(input);
-    }
-  });
-  return matches;
+  return inputs.filter((i) => Anagram.isAnagram(this.word, i));
 };
 
-Anagram.prototype.sortedChars = function(word) {
-  word = word.toLowerCase();
-  return [...word].sort().join();
+Anagram.isAnagram = function(word1, word2) {
+  return Anagram.sortedChars(word1) == Anagram.sortedChars(word2) &&
+           word1.toLowerCase() != word2.toLowerCase();
+};
+
+Anagram.sortedChars = function(word) {
+  return [...word.toLowerCase()].sort().join();
 };
 
 module.exports = Anagram;
