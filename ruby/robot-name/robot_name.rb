@@ -1,5 +1,7 @@
 class Robot
   @@taken_names = {}
+  @@letters = ('A'..'Z').to_a
+  @@numbers = (0..9).to_a
 
   def reset
     @name = nil
@@ -26,9 +28,10 @@ class Robot
   end
 
   def make_name
-    letters = ('A'..'Z').to_a.sample(2).join('')
-    numbers = (0..9).to_a.sample(3).join('')
-    "#{letters}#{numbers}"
+    out = ''
+    2.times { out += @@letters.sample }
+    3.times { out += @@numbers.sample.to_s }
+    out
   end
 end
 
