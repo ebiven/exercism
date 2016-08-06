@@ -1,7 +1,10 @@
 var BinarySearch = function(array) {
-  if (!array.reduce((p, c) => p < c, false)) {
-    return undefined;
-  }
+  const sortedAscending = (v, i) => {
+    if (i === 0) { return true; }
+    if (v < array[i - 1]) { return false; }
+    return true;
+  };
+  if (!array.every(sortedAscending)) { return undefined; }
   this.array = array;
 };
 
