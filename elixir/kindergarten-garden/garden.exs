@@ -39,11 +39,11 @@ defmodule Garden do
   defp student_reducer({name, index}, acc, rows) do
     real_index = index * 2
     plants = cond do
-      real_index >= Enum.count(List.first(rows)) -> {}
+      real_index >= rows |> List.first |> length -> {}
       true -> { rows |> List.first |> Enum.at(real_index),
                 rows |> List.first |> Enum.at(real_index + 1),
-                rows |> List.last |> Enum.at(real_index),
-                rows |> List.last |> Enum.at(real_index + 1)
+                rows |> List.last  |> Enum.at(real_index),
+                rows |> List.last  |> Enum.at(real_index + 1)
               }
     end
     Map.put(acc, name, plants)
