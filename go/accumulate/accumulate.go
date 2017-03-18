@@ -4,7 +4,7 @@ const testVersion = 1
 
 func Accumulate(a []string, f func(item string) string) (result []string) {
 	for _, i := range a {
-		result = append(result, []string{f(i)}...)
+		result = append(result, f(i))
 	}
 	return
 }
