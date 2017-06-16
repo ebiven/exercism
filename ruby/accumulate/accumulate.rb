@@ -1,7 +1,7 @@
 class Array
   def accumulate
     out = []
-    each { |i| out.push(yield(i)) }
+    each { |i| out << yield(i) }
     out
   end
 end
