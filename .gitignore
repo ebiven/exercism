@@ -1,2 +1,3 @@
 *.beam
 *.pyc
+node_modules
