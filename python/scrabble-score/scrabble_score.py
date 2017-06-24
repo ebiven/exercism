@@ -12,4 +12,4 @@ SCORE_MAP = {
 POINTS = { v: k for k, vs in SCORE_MAP.items() for v in vs }
 
 def score(word):
-    return sum([ POINTS[l] for l in word.lower() ])
+    return sum(POINTS[l] for l in word.lower())
