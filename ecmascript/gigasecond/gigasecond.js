@@ -4,7 +4,7 @@ class Gigasecond {
   }
 
   date() {
-    return new Date(this.dt.getTime() + Math.pow(10, 12));
+    return new Date(this.dt.getTime() + 1e12);
   }
 }
 
