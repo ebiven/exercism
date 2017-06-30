@@ -1,8 +1,8 @@
-let usedNames = new Set<string>();
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const numbers = "0123456789";
-
 export default class RobotName {
+  private static usedNames = new Set<string>();
+  private static letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  private static numbers = "0123456789";
+
   private _name: string;
 
   constructor() {
@@ -27,9 +27,9 @@ export default class RobotName {
   private generateName(): string {
     let n = '';
     do {
-      n = `${this.randomFromSet(letters, 2)}${this.randomFromSet(numbers, 3)}`;
-    } while (usedNames.has(n))
-    usedNames.add(n);
+      n = `${this.randomFromSet(RobotName.letters, 2)}${this.randomFromSet(RobotName.numbers, 3)}`;
+    } while (RobotName.usedNames.has(n))
+    RobotName.usedNames.add(n);
     return n;
   }
 }
