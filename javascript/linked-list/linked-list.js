@@ -23,12 +23,14 @@ LinkedList.prototype.push = function(value) {
 LinkedList.prototype.pop = function() {
   let tailValue = this.tail.value;
   this.tail = this.tail.prev;
+  if (this.tail == null) { this.head = null; }
   return tailValue;
 };
 
 LinkedList.prototype.shift = function() {
   let headValue = this.head.value;
   this.head = this.head.next;
+  if (this.head == null) { this.tail = null; }
   return headValue;
 };
 
