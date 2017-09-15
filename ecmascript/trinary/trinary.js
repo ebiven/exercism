@@ -1,16 +1,20 @@
 // Oh good, the binary problem with two character changes.
-export default class Trinary {
-  constructor(value) {
-    this.value = value;
+class DecimalConverter {
+  constructor(value, matchRegex, base) {
+    this.value      = value;
+    this.matchRegex = matchRegex;
+    this.base       = base;
   }
 
   toDecimal() {
-    return DecimalConverter(this.value, /^[0-2]+$/, 3);
+    if (!this.value.match(this.matchRegex)) { return 0; }
+    return [...this.value].reverse().reduce((pV, cV, index) =>
+      pV + cV * Math.pow(this.base, index), 0);
   }
 }
 
-const DecimalConverter = function(value, matchRegex, base) {
-  if (!value.match(matchRegex)) { return 0; }
-  return [...value].reverse().reduce((pV, cV, index) =>
-    pV + cV * Math.pow(base, index), 0);
-};
+export default class Trinary extends DecimalConverter {
+  constructor(value) {
+    super(value, /^[0-2]+$/, 3);
+  }
+}
